@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anlık Konum</title>
+</head>
+<!--Diğer koddaki Hata mesajlarını ve ID Kısımlarını İsterseniz Buraya Geçirip Tamamlayabilirsiniz-->
+<body>
+    <button onclick="getCurrentLocation()">ANLIK KONUM</button>
+    <script>
+        function getCurrentLocation(){
+            var geolocation = navigator.geolocation;
+            geolocation.getCurrentPosition(showCurrentLocation);
+            var img_url ="http://maps.googleapis.com/maps/api/staticmap?center="
+            +latlon+"&zoom=14&size=400x300&sensor=false";
+            document.getElementById().innerHTML="<img src='"+img_url+"'>";
+        }
+        function showCurrentLocation(){
+            var latitude = location.coords.latitude;
+            var longitude = location.coords.longitude;
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kullanıcı Konumu</title>
+</head>
+<body>
+    <p id="KUL_DENE">KULLANICI KONUMU:</p>
+    <button onclick ="getuserLocation()">KONUM KONTROL</button>
+    <div id="HAR_DENE"></div>
+    <script>
+        var x = document.getElementById("KUL_DENE")
+        function getuserLocation(){
+            if(navigator.geolocation){
+                navigator.geolocation.getCurrentPosition(showuserPosition,showbrowserError);
+            }
+            else{
+                x.innerHTML="TARAYICI GEOLOCATION I DESTEKLEMIYOR"
+            }
+        }
+        function showuserPosition(position){
+            var latlon=position.coords.latitude+","+position.coords.longitude;
+            var img_url ="http://maps.googleapis.com/maps/api/staticmap?center="
+            +latlon+"&zoom=14&size=400x300&sensor=false";
+            document.getElementById("HAR_DENE").innerHTML="<img src='"+img_url+"'>";
+        }
+
+        function showbrowserError(error){
+            switch(error.code){
+                case error.PERMISSION_DENIED:
+                    x.innerHTML="KULLANICI GEOLOCATION TALEBINI REDDETTI"
+                    break;
+                    case error.POSITION_UNAVAILABLE:
+                        x.innerHTML="KONUM BILGISI YOK"
+                        break;
+                        case error.TIMEOUT:
+                            x.innerHTML="ZAMAN ASIMI"
+                            break;
+                            case error.UNKNOWN_ERROR:
+                                x.innerHTML="BILINMEYEN HATA"
+                                break;
+            }
+        }
+    </script>
+</body>
+</html>

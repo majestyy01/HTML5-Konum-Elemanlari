@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulunan Konum</title>
+    <script src="http://maps.google.com/maps/api/js?sensor=false">
+    </script>
+    <script>
+        if(navigator.geolocation){
+            navigator.geolocation.getCurrentPosition(showCurrentLocaiton)
+        }
+        else{
+            alert("Geolocation API DESTEKLEMIYOR")
+        }
+        function showCurrentLocaiton(position){
+            var latitude = position.coords.latitude;
+            var longitude = position.coords.longitude;
+            var coords = new google.maps.LatLng(latitude, longitude);
+            var mapOptions = {
+                zoom: 20,
+                center: coords,
+                mapTypeControl: true,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            };
+            //HARİTAYI OLUŞTUR VE HTML5 DIV İÇİNE KOY
+            map = new google.maps.Map(
+                document.getElementById("HARITA_M"), mapOptions
+            );
+            //İlk İşaretleyici Koy
+            var marker = new google.maps.Marker({
+                position: coords,
+                map: map,
+                title: "BULUNAN KONUM!"
+            });
+        }
+        
+    </script>
+</head>
+<style>
+    #HARITA_M{
+        height: 450px;
+        width: 750px;
+    }
+</style>
+<body>
+    <div>
+        <h2>GOOGLE HARITASINDAKI YERINIZ</h2>
+        <div id="HARITA_M"></div>
+    </div>
+</body>
+</html>
